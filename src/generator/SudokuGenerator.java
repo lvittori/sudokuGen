@@ -2,7 +2,11 @@ package generator;
 
 import java.util.*;
 
-
+/**
+ * Bietet Methoden zum Erstellen und Lösen von 4x4 oder 9x9 Sudokus
+ * @author Lisa Vittori
+ * @version 2021-02-21
+ */
 public class SudokuGenerator {
 	/**
 	 * Erzeugt 4x4 or 9x9 Sudokus
@@ -27,8 +31,12 @@ public class SudokuGenerator {
 					sudoku[r + i*sectionSize][c + i*sectionSize] = shuffleList.remove(0);
 				}
 			}
-		}		
-		solve(sudoku);
+		}	
+		// anstelle des 2. Teilquadrats wird nur ein Wert des Teilquadrats zufällig gesetzt
+		if(small) {
+			sudoku[size-1][size-1] = (int)(Math.random()*4+1);
+		}
+		SudokuGenerator.solve(sudoku);
 		return sudoku;
 	}
 	
@@ -136,7 +144,7 @@ public class SudokuGenerator {
 	/**
 	 * Versucht zu einem quadratischen Sudoku mit Hilfe eines rekursiven backtracking-
 	 * Algorithmus eine Lösung zu finden. ACHTUNG! Dieser Algorithmus erkennt nicht, ob die
-	 * Lösung eindeutig ist
+	 * Lösung eindeutig ist, sondern findet einfach eine gültige Lösung
 	 * @param sudoku das zu lösende Sudoku
 	 * @return true, wenn eine Lösung gefunden wurde.
 	 */
@@ -167,4 +175,5 @@ public class SudokuGenerator {
 		// Falls wir bis hierher kommen, haben wir es geschafft
 		return true;
 	}
+	
 }
